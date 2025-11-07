@@ -11,32 +11,32 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/admin")
-@CrossOrigin(origins = "*") // allows access from Postman / frontend
+@CrossOrigin(origins = "*") 
 public class AdminController {
 
     @Autowired
     private AdminRepository adminRepository;
 
-    // ✅ CREATE - POST
+    
     @PostMapping
     public Admin createAdmin(@RequestBody Admin admin) {
         return adminRepository.save(admin);
     }
 
-    // ✅ READ ALL - GET
+
     @GetMapping
     public List<Admin> getAllAdmins() {
         return adminRepository.findAll();
     }
 
-    // ✅ READ ONE - GET by ID
+   
     @GetMapping("/{id}")
     public Admin getAdminById(@PathVariable Long id) {
         return adminRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Admin not found with id: " + id));
     }
 
-    // ✅ UPDATE - PUT
+   
     @PutMapping("/{id}")
     public Admin updateAdmin(@PathVariable Long id, @RequestBody Admin updatedAdmin) {
         Admin existingAdmin = adminRepository.findById(id)
@@ -53,7 +53,7 @@ public class AdminController {
         return adminRepository.save(existingAdmin);
     }
 
-    // ✅ DELETE
+   
     @DeleteMapping("/{id}")
     public String deleteAdmin(@PathVariable Long id) {
         if (!adminRepository.existsById(id)) {
